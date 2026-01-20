@@ -30,3 +30,18 @@ The project is designed for **educational and academic purposes**, helping stude
 - **HTML / CSS**
 - **Bash scripting**
 - **Linux** (Kali Linux recommended)
+
+## 🛠️ Installation & Execution
+
+### Prerequisites
+
+- Linux (Kali Linux recommended)
+- Python 3.9+
+- Metasploit Framework
+- SQLMap
+
+### Make the script executable and run it:
+<img width="414" height="75" alt="image" src="https://github.com/user-attachments/assets/6b6c9050-f58c-4c61-9d33-248d796afc9c" />
+
+
+
