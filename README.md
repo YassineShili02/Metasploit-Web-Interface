@@ -41,7 +41,8 @@ The project is designed for **educational and academic purposes**, helping stude
 - SQLMap
 
 ### Make the script executable and run it:
-<img width="414" height="75" alt="image" src="https://github.com/user-attachments/assets/6b6c9050-f58c-4c61-9d33-248d796afc9c" />
+<img width="448" height="107" alt="image" src="https://github.com/user-attachments/assets/a3bfc9a2-41fe-4c22-aeef-5c858d18faa4" />
+
 
 
 
