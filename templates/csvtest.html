@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to HTML Table</title>
+</head>
+<body>
+
+<h2>CSV to HTML Table</h2>
+
+<!-- Display CSV content in a table -->
+<div id="table-container"></div>
+
+<script>
+// Replace 'your_file_path_or_url.csv' with the actual path or URL of your CSV file
+const csvFilePath = 'f /root/.local/share/sqlmap/output/{target_url}/dump/{selected_database}/book.csv';
+
+// Fetch the CSV file
+fetch(csvFilePath)
+    .then(response => response.text())
+    .then(content => {
+        const rows = content.split('\n');
+
+        // Create an HTML table
+        const table = document.createElement('table');
+        table.border = '1';
+
+        // Iterate through each row of the CSV
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].split(',');
+
+            // Create a table row
+            const row = table.insertRow();
+
+            // Iterate through each cell of the row
+            for (let j = 0; j < cells.length; j++) {
+                // Create a table cell
+                const cell = row.insertCell();
+
+                // Add the cell content
+                cell.textContent = cells[j];
+            }
+        }
+
+        // Append the table to the container
+        const tableContainer = document.getElementById('table-container');
+        tableContainer.innerHTML = '';
+        tableContainer.appendChild(table);
+    })
+    .catch(error => {
+        console.error('Error fetching the CSV file:', error);
+    });
+</script>
+
+</body>
+</html>
+

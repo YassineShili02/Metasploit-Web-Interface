@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SQL Injection Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #video-background {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .result-container {
+            width: 90%; /* Increase the width of the container */
+            max-width: 800px; /* Adjust the max-width as needed */
+            margin-top: 20px;
+            background-color: #000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #333;
+            padding: 15px;
+            background-color: #2ecc71;
+            margin: 0;
+            border-radius: 10px 10px 0 0;
+        }
+
+        p {
+            padding: 15px;
+            color: #fff;
+            margin: 0;
+            word-wrap: break-word; /* Add word-wrap to ensure the result fully shows */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="video-container">
+        <video id="video-background" autoplay loop muted>
+            <source src="{{ url_for('static', filename='hacker-theme2.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="result-container">
+        <h1>SQL Injection Result</h1>
+        {% for line in result.split('\n') %}
+            {% if 'Type' in line or 'Payload' in line %}
+                <p>{{ line|safe }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+
+</html>

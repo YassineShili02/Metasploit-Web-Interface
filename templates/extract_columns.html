@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSV Data</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <style>
+        #csvTable {
+            width: 100%;
+            max-height: calc(100vh - 40px);
+            overflow: auto;
+        }
+
+        th, td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 10px;
+            border: 1px solid #ddd;
+            height:5vh;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        td.short-word {
+            max-width: 50px; /* Adjust the maximum width as needed */
+        }
+
+        .dataTables_wrapper {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <table id="csvTable" class="display">
+        <thead>
+            <tr>
+                {% for header in csv_data[0].keys() %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in csv_data %}
+                <tr>
+                    {% for value in row.values() %}
+                        <td {% if value|length < 10 %}class="short-word"{% endif %}>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            $('#csvTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                lengthChange: false,
+                info: false
+            });
+        });
+    </script>
+</body>
+</html>
+

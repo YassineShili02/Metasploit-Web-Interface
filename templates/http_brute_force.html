@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>HTTP Directory Enumeration Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #video-background {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .output {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000; /* Change background color to black */
+    padding: 40px; /* Increase the padding to make the box larger */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 60%; /* Adjust the width to your preference */
+    max-width: 600px;
+    margin-top: 20px;
+    overflow-x: auto;
+    text-align: center;
+    z-index: 2;
+    color: #fff; /* Change text color to white */
+    font-size: 20px; /* Adjust the font size to your preference */
+}
+
+
+
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .username {
+            color: #3498db;
+        }
+
+        .password {
+            color: #e74c3c;
+        }
+
+        .dot {
+            color: #27ae60;
+        }
+
+        /* Added style for "SSH BRUTE FORCE" */
+        #ssh-brute-force {
+            font-size: 36px;
+            color: #333; /* Match the color of the title */
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>HTTP Directory Enumeration Result</h1>
+    <div class="output">
+        {% for line in exploit_output_lines %}
+    {% if 'Found' in line %}
+        {% set parts = line.split(' ') %}
+        {% set url = parts[2] %}
+        <p><a class="link" href="{{ url }}" target="_blank" style="color: #fff;">{{ url }}</a></p>
+    {% endif %}
+{% endfor %}
+
+        <p></p>
+    </div>
+</body>
+<div id="video-container">
+        <video autoplay muted loop id="video-background">
+            <source src="{{ url_for('static', filename='hacker-theme2.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+</html>
+

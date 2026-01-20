@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.env
+
+# Metasploit / sqlmap / outputs
+*.log
+*.csv
+output/
+dump/
+loot/
+sessions/
+*.mov
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+

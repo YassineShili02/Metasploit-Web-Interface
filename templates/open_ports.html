@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Open Ports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Video Background Container -->
+    <div id="video-container">
+        <video id="video-background" autoplay loop muted>
+            <source src="{{ url_for('static', filename='hacker-theme2.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Content Container -->
+    <div class="container">
+        <h1>Open Ports for {{ target_ip }}</h1>
+        <ul>
+            {% for port_info in open_ports %}
+                <li>Port: {{ port_info.port }} ({{ port_info.service }})</li>
+            {% endfor %}
+        </ul>
+
+        <form action="/sql_injection" method="post">
+            <button type="submit" id="sqlInjectionButton">SQL Injection</button>
+        </form>
+
+        <form action="/brute_force" method="get" id="bruteForceForm">
+            <button type="submit" id="bruteForceButton">Brute Force Attack</button>
+        </form>
+
+        <script>
+            var sshAvailable = {{ ssh_available|lower }};
+            var telnetAvailable = {{ telnet_available|lower }};
+            var httpAvailable = {{ http_available|lower }};
+
+            var bruteForceForm = document.getElementById('bruteForceForm');
+            var bruteForceButton = document.getElementById('bruteForceButton');
+
+            if (!(sshAvailable  telnetAvailable  httpAvailable)) {
+                bruteForceButton.disabled = true;
+                bruteForceForm.onsubmit = function(event) {
+                    event.preventDefault();
+                    alert('Brute Force Attack is unavailable because there are no available services (SSH, Telnet, or HTTP).');
+                };
+            }
+        </script>
+    </div>
+</body>
+</html>

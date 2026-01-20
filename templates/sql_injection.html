@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SQL Injection Tester</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden; /* Prevent scrolling caused by the video */
+        }
+
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Set a lower z-index for the video */
+        }
+
+        #video-background {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333; /* Set the color for the heading */
+            margin-top: 20px;
+        }
+
+        .container {
+            text-align: center;
+            width: 80%;
+            max-width: 600px; /* Increase the max-width */
+            margin: 0 auto;
+            padding: 40px; /* Increase the padding */
+            box-sizing: border-box;
+            position: absolute; /* Change to absolute */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8); /* Use rgba to control the background opacity */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2; /* Set a higher z-index for the container */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333; /* Set the color for labels */
+        }
+
+        input[type="text"] {
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #4caf50; /* Matrix green color for buttons */
+            color: white; /* Set the text color for buttons */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Video Background Container -->
+    <div id="video-container">
+        <video id="video-background" autoplay loop muted>
+            <source src="{{ url_for('static', filename='hacker-theme2.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Content Container -->
+    <div class="container">
+        <h1>SQL Injection Tester</h1>
+
+        <form action="/sql_injection_result" method="post">
+            <label for="target_url">Target Link:</label>
+            <input type="text" id="target_url" name="target_url" required>
+            <br>
+            <label for="get_id">GET Parameter ID:</label>
+            <input type="text" id="get_id" name="get_id" required>
+            <br>
+            <label for="selected_database">Database Name:</label>
+            <input type="text" id="selected_database" name="selected_database" >
+            <br>
+            <label for="selected_t">Table Name:</label>
+            <input type="text" id="selected_t" name="selected_t">
+            
+            
+            <button type="submit" name="test_sql_injection">SQL Injection Test</button>
+            <button type="submit" formaction="/sql_injection_database" name="display_database">Display Database</button>
+            <button type="submit" formaction="/sql_injection_tables" name="display_tables">Display Tables</button>
+            <button type="submit" formaction="/sql_injection_columns" name="display_columns">Display Columns</button>
+            <button type="submit" formaction="/extract_columns" name="extract_button">Extract Columns</button>
+            
+            
+        </form>
+        
+
+</form>
+
+    </div>
+</body>
+
+</html>

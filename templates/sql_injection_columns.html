@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tables and Columns</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #video-background {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .result-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #000;
+            max-width: 600px;
+            max-height: 685px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #000;
+            border-radius: 10px;
+            overflow-y: auto;
+            padding: 11px;
+            flex-grow: 1;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+        }
+
+        h1 {
+            color: #333;
+            padding: 10px;
+            background-color: #2ecc71;
+            margin: 0;
+            border-radius: 10px 10px 0 0;
+        }
+
+        h2 {
+            color: #fff;
+        }
+
+        p {
+            padding: 10px;
+            color: #fff;
+            margin: 0;
+            word-wrap: break-word;
+        }
+
+        #sqlmap-output {
+            display: none;
+        }
+
+        .line {
+            font-family: monospace;
+            color: #000;
+            margin: 0;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="video-container">
+        <video id="video-background" autoplay loop muted>
+            <source src="{{ url_for('static', filename='hacker-theme2.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="result-container">
+        <h1>Columns</h1>
+        <h2> Available Columns in Database '{{ selected_database }}':</h2>
+        <ul>
+            {% for line in result.split('\n') %}
+            {% if 'Column' in line or '|' in line %}
+            {% if '_ -|' not in line and '|___|_' not in line and '|_|V...' not in line %}
+            <li>{{ line.strip('|').strip() }}</li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+
+</html>
+

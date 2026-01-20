@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SQL Injection Tester</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <h1>SQL Injection Tester</h1>
+
+    <form action="/sql_injection_test" method="post">
+        <label for="target_url">Target Link:</label>
+        <input type="text" id="target_url" name="target_url" required>
+        <br>
+        <label for="get_id">GET Parameter ID:</label>
+        <input type="text" id="get_id" name="get_id" required>
+        <br>
+        <button type="submit" name="test_sql_injection">SQL Injection Test</button>
+        <button type="submit" name="display_database">Display Database</button>
+    </form>
+</body>
+
+</html>
+
